@@ -1,0 +1,10 @@
+<% include partials/head %>
+<h1><%= data[1].name %></h1>
+<h2>Hello world</h2>
+<% data.forEach(function(user){ %>
+   <p><%= user.name %></p>
+   <p><%= user.email %></p>
+   <p><%= user.password %></p>
+   <b>End of user</b>
+<% }); %>
+<% include partials/foot %>
