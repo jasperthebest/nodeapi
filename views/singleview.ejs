@@ -7,7 +7,6 @@
 <h2>Hello world</h2>
 <% if(data.length>1) {
 data.forEach(function(user){ %>
-   <p><%= user._id %></p>
    <p><%= user.name %></p>
    <p><%= user.email %></p>
    <p><%= user.password %></p>
@@ -15,7 +14,6 @@ data.forEach(function(user){ %>
 <% }); 
 } else {
 %>
-<p><%= data._id %></p>
 <p><%= data.name %></p>
 <p><%= data.email %></p>
 <p><%= data.password %></p>
