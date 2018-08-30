@@ -19,9 +19,9 @@ router.post('/', (req, res) => {
 	//var reqtoken = 0;
 	User.findOne(user).exec((err, users) => {
 		if (err) return res.status(500).send("There was a problem finding the users.");
-		req.session.userid = users.id;
 		//req.session.userid = "hello";
 		if(users) {
+			req.session.userid = users.id;
 			jwt.sign({user}, process.env.SECRET_KEY, { expiresIn: '150s' }, (err, token) => {
 				res.status(200);
 	        	res.json({token});
@@ -55,6 +55,13 @@ router.get('/', (req, res) => {
 		});
 	});
 	*/
+});
+
+/* Logout */
+router.get('/logout', (req, res) => {
+    //req.logout();
+    req.session.destroy();
+    res.redirect('/login');
 });
 
 module.exports = router;

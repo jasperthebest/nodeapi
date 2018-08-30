@@ -1,21 +1,32 @@
 var express = require('express');
 var app = express();
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 var bodyParser = require('body-parser');
+var store = new MongoDBStore({
+  uri: 'mongodb://localhost/ipademo?useNewUrlParser=true',
+  collection: 'session'
+});
 var db = require('./db.js');
 
 const path = require("path");
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use('/media', express.static(path.join(__dirname, 'public')));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(session({ 
 	secret: 'helloworld',
-	resave: true, 
-	saveUninitialized: true 
+	cookie: {
+	    // maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+	    maxAge: 1000 * 60 * 2
+	 },
+	 store: store,
+	resave: false, 
+	saveUninitialized: false 
 }));
 
 /*

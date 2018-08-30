@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 // RETURNS ALL THE USERS IN THE DATABASE
 router.get('/', function (req, res) {
     //console.log(req.session.id);
-    console.log(req.session.userid);
+    //console.log(req.session.userid);
     if(req.session.userid) {
         User.find({}).sort({'name': 1}).limit(5).exec(function (err, users) {
             if (err) return res.status(500).send("There was a problem finding the users.");
